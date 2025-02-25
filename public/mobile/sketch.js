@@ -9,7 +9,7 @@ function setup() {
     background(220);
 
     // Conectar al servidor de Socket.IO
-    let socketUrl = 'http://255.255.192.0:3000';
+    let socketUrl = 'http://10.8.100.197:3000';
     //let socketUrl = 'https://obscure-space-guacamole-q5pg4q75rppcxqj-3000.app.github.dev/';
     socket = io(socketUrl);
 
