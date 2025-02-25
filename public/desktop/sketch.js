@@ -9,7 +9,7 @@ function setup() {
     background(220);
 
     //let socketUrl = 'http://localhost:3000';
-    let socketUrl = 'https://supreme-space-eureka-x9wpv75jjpf6gpv-3000.app.github.dev/';
+    let socketUrl = 'https://obscure-space-guacamole-q5pg4q75rppcxqj-3000.app.github.dev/';
     socket = io(socketUrl); 
 
     // Evento de conexión exitosa
