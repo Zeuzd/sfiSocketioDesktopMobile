@@ -9,7 +9,7 @@ function setup() {
     createCanvas(400, 400);
     background(220);
 
-    let socketUrl = 'http://10.8.100.197:3000';
+    let socketUrl = 'https://obscure-space-guacamole-q5pg4q75rppcxqj-3000.app.github.dev/';
     socket = io(socketUrl);
 
     socket.on('connect', () => {
