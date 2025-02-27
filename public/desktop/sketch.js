@@ -1,23 +1,19 @@
 let socket;
 let circleX = 200;
 let circleY = 200;
-const port = 3000;
-
+let receivedImg = null;
 
 function setup() {
     createCanvas(400, 400);
     background(220);
 
-    //let socketUrl = 'http://localhost:3000';
     let socketUrl = 'https://obscure-space-guacamole-q5pg4q75rppcxqj-3000.app.github.dev/';
-    socket = io(socketUrl); 
+    socket = io(socketUrl);
 
-    // Evento de conexión exitosa
     socket.on('connect', () => {
         console.log('Connected to server');
     });
 
-    // Recibir mensaje del servidor
     socket.on('message', (data) => {
         console.log(`Received message: ${data}`);
         let parsedData = JSON.parse(data);
@@ -25,9 +21,13 @@ function setup() {
             circleX = parsedData.x;
             circleY = parsedData.y;
         }
-    });    
+    });
 
-    // Evento de desconexión
+    socket.on('image', (imgData) => {
+        console.log('Received image');
+        receivedImg = loadImage(imgData); // Convertir Base64 a imagen
+    });
+
     socket.on('disconnect', () => {
         console.log('Disconnected from server');
     });
@@ -39,6 +39,11 @@ function setup() {
 
 function draw() {
     background(220);
-    fill(255, 0, 0);
-    ellipse(circleX, circleY, 50, 50);
+    
+    if (receivedImg) {
+        image(receivedImg, 0, 0, width, height);
+    } else {
+        fill(255, 0, 0);
+        ellipse(circleX, circleY, 50, 50);
+    }
 }

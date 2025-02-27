@@ -24,3 +24,20 @@ io.on('connection', (socket) => {
 server.listen(port, () => {
     console.log(`Server is listening on http://localhost:${port}`);
 });
+io.on('connection', (socket) => {
+    console.log('New client connected');
+
+    socket.on('message', (message) => {
+        console.log(`Received message => ${message}`);
+        socket.broadcast.emit('message', message);
+    });
+
+    socket.on('image', (imgData) => {
+        console.log('Received an image');
+        socket.broadcast.emit('image', imgData);
+    });
+
+    socket.on('disconnect', () => {
+        console.log('Client disconnected');
+    });
+});
